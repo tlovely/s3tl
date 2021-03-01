@@ -52,7 +52,8 @@ class FSExtractor(Extractor):
 
     async def __call__(self) -> AsyncGenerator[bytes, None]:
         _, _, filepaths = next(walk(self._path))
+        _path = self._path if self._path.endswith("/") else f"{self._path}/"
         for filepath in filepaths:
-            async with aiofiles.open(f"{self._path}{filepath}", "rb") as f:
+            async with aiofiles.open(f"{_path}{filepath}", "rb") as f:
                 async for line in f:
-                    yield (line, self._path, filepath)
+                    yield (line, _path, filepath)

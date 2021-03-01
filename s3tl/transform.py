@@ -1,4 +1,4 @@
-from typing import Coroutine, Optional, Any, Union
+from typing import Coroutine, Optional, Any, Union, Callable
 
 
 async def noop(*args: Any, **kwargs: Any) -> Any:
@@ -9,7 +9,7 @@ class Operation:
     def __init__(
         self,
         fn: Coroutine,
-        load: Optional[Coroutine] = noop,
+        load: Coroutine = noop,
     ):
         self._fn = fn
         self._load = load
@@ -27,9 +27,9 @@ class Map(Operation):
 class Reduce(Operation):
     def __init__(
         self,
-        accu: Any,
+        accu: Callable,
         fn: Coroutine,
-        load: Optional[Coroutine] = noop,
+        load: Coroutine = noop,
     ):
         self._fn = fn
         self._load = load

@@ -39,7 +39,8 @@ async def aggregate(accu, line, bucket, key):
     return accu
 
 
-# Run ETL. Pipeline is fed lines as they stream from extraction source.
-# Load hooks are run immediately after processing a single line for map and filter,
-# and after all lines are processed for reduce.
-loop_run(etl.run(FSExtractor("data/")))
+if __name__ == "__main__":
+    # Run ETL. Pipeline is fed lines as they stream from extraction source.
+    # Load hooks are run immediately after processing a single line for map and filter,
+    # and after all lines are processed for reduce.
+    loop_run(etl.run(FSExtractor("data/")))

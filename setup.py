@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
-
+from setuptools import setup, find_packages
 
 setup(
     name="s3tl",
     version="0.0.1",
     description="Framework for building ETLs against AWS S3",
+    long_description=open("README.md").read(),
+    license="MIT",
     author="Tyler Lovely",
     author_email="tyler.n.lovely@gmail.com",
-    packages=["s3tl"],
+    packages=find_packages(),
     python_requires=">=3.6, <4",
+    url="https://github.com/tlovely/s3tl",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -27,4 +29,11 @@ setup(
         "aiobotocore>=1.2.1,<2",
         "toolz",
     ],
+    extras_require={
+        "dev": [
+            "pytest==6.2.2",
+            "mypy==0.812",
+            "black==20.8b1",
+        ]
+    },
 )
